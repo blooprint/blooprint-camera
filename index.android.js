@@ -1,22 +1,17 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 'use strict';
 import React, { Component } from 'react';
-import {
-    AppRegistry,
-    Dimensions,
-    StyleSheet,
-    Text,
-    TouchableHighlight,
-    View
-} from 'react-native';
+import { AppRegistry, Dimensions, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import Camera from 'react-native-camera';
 
+var io = require('socket.io-client')
+
 class camera extends Component {
+
+    constructor(props) {
+        super(props)
+        this.socket = io.connect('http://192.168.0.4:3000')
+    }
+
   render() {
     return (
       <View style={styles.container}>
@@ -38,6 +33,8 @@ class camera extends Component {
     this.camera.capture({metadata: options})
       .then((data) => console.log(data))
       .catch(err => console.error(err));
+
+      this.socket.emit('bloop','CAPTURED!')
   }
 }
 
