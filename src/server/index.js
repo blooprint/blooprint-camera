@@ -1,12 +1,15 @@
 var express = require('express');
 var app = express();
-var server = app.listen(process.env.PORT || 3000, listen);
+var server = app.listen(process.env.PORT || 3456, listen);
 
 function listen() {
     var host = server.address().address;
     var port = server.address().port;
     console.log('Example app listening at http://' + host + ':' + port);
 }
+
+var backsIO = require('socket.io-client')
+var backSocket = backsIO.connect('http://localhost:1234')
 
 var io = require('socket.io')(server);
 
@@ -18,6 +21,8 @@ io.sockets.on('connection',
 
         socket.on('bloop', function(stuff) {
             console.log("Received: 'bloop': " + stuff);
+
+            backSocket.emit('bloop','part 2 complete')
         });
 
         socket.on('disconnect', function() {

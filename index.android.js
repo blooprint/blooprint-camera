@@ -9,7 +9,7 @@ class camera extends Component {
 
     constructor(props) {
         super(props)
-        this.socket = io.connect('http://192.168.0.4:3000')
+        this.socket = io.connect('http://192.168.0.4:3456')
     }
 
   render() {
@@ -21,7 +21,7 @@ class camera extends Component {
           }}
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}>
-          <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+          <Text style={styles.capture} onPress={this.takePicture.bind(this)}>bloop</Text>
         </Camera>
       </View>
     );
