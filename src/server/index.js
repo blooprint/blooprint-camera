@@ -13,20 +13,17 @@ var backSocket = backsIO.connect('http://localhost:1234')
 
 var io = require('socket.io')(server);
 
-io.sockets.on('connection',
+io.sockets.on('connection', function (socket) {
 
-    function (socket) {
+    console.log("new camera client: " + socket.id);
 
-        console.log("We have a new client: " + socket.id);
+    socket.on('bloop', function(stuff) {
+        console.log("Received: " + stuff);
 
-        socket.on('bloop', function(stuff) {
-            console.log("Received: 'bloop': " + stuff);
+        backSocket.emit('bloop','blooprint/input calling')
+    });
 
-            backSocket.emit('bloop','part 2 complete')
-        });
-
-        socket.on('disconnect', function() {
-            console.log("Client has disconnected");
-        });
-    }
-);
+    socket.on('disconnect', function() {
+        console.log("Client has disconnected");
+    });
+});

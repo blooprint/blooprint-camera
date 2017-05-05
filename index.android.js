@@ -9,7 +9,12 @@ class camera extends Component {
 
     constructor(props) {
         super(props)
-        this.socket = io.connect('http://192.168.0.4:3456')
+        /*
+        TODO:
+        server ip needs to be set bt user ... somehow
+        */
+        var server_IP = '192.168.0.2'
+        this.socket = io.connect('http://'+ server_IP +':3456')
     }
 
   render() {
@@ -34,7 +39,7 @@ class camera extends Component {
       .then((data) => console.log(data))
       .catch(err => console.error(err));
 
-      this.socket.emit('bloop','CAPTURED!')
+      this.socket.emit('bloop','bloop triggered')
   }
 }
 
