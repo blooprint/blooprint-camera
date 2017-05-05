@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { AppRegistry, Dimensions, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import Camera from 'react-native-camera';
-import capture from './src/client/capture'
 
 var io = require('socket.io-client')
 
