@@ -17,10 +17,11 @@ io.sockets.on('connection', function (socket) {
 
     console.log("new camera client: " + socket.id);
 
-    socket.on('bloop', function(stuff) {
-        console.log("Received: " + stuff);
+    socket.on('bloop', function(data) {
+        console.log("Received: " + data.message);
+        console.log("image binary: " + data.image);
 
-        backSocket.emit('bloop','blooprint/input calling')
+        backSocket.emit('bloop',{image: data.image, message: data.message})
     });
 
     socket.on('disconnect', function() {

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, Dimensions, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import Camera from 'react-native-camera';
+import capture from './src/client/capture'
 
 var io = require('socket.io-client')
 
@@ -19,30 +20,29 @@ class camera extends Component {
         this.socket = io.connect('http://'+ server_IP +':3456')
     }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Camera
-          ref={(cam) => {
-            this.camera = cam;
-          }}
-          style={styles.preview}
-          aspect={Camera.constants.Aspect.fill}>
-          <Text style={styles.capture} onPress={this.takePicture.bind(this)}>bloop</Text>
-        </Camera>
-      </View>
-    );
-  }
+    render() {
+        return (
+            <View style={styles.container}>
+                <Camera
+                    ref={(cam) => { this.camera = cam; }}
+                    style={styles.preview}
+                    aspect={Camera.constants.Aspect.fill}
+                    captureTarget={Camera.constants.CaptureTarget.memory}>
+                        <Text style={styles.capture} onPress={() => this.bloop()}>bloop</Text>
+                </Camera>
+            </View>
+        );
+    }
 
-  takePicture() {
-    const options = {};
-    //options.location = ...
-    this.camera.capture({metadata: options})
-      .then((data) => console.log(data))
-      .catch(err => console.error(err));
-
-      this.socket.emit('bloop','bloop triggered')
-  }
+    bloop() {
+        const options = {};
+        //options.location = ...
+        this.camera.capture({metadata: options})
+            .then((data) => {
+                this.socket.emit('bloop',{image: data, message:'input image from camera client'})
+            })
+            .catch(err => console.error(err));
+    }
 }
 
 const styles = StyleSheet.create({
