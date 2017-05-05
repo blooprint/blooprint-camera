@@ -5,6 +5,8 @@ import Camera from 'react-native-camera';
 
 var io = require('socket.io-client')
 
+var rnfs = require('react-native-fs');
+
 class camera extends Component {
 
     constructor(props) {

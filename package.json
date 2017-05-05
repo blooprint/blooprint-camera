@@ -10,17 +10,18 @@
     "server": "node ./src/server"
   },
   "dependencies": {
+  },
+  "devDependencies": {
     "express": "^4.15.2",
     "react": "16.0.0-alpha.6",
     "react-native": "0.43.3",
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
     "socket.io": "^1.7.3",
-    "socket.io-client": "^1.7.3"
-  },
-  "devDependencies": {
+    "socket.io-client": "^1.7.3",
     "babel-jest": "19.0.0",
     "babel-preset-react-native": "1.9.1",
     "jest": "19.0.2",
+    "react-native-fs": "^2.3.2",
     "react-test-renderer": "16.0.0-alpha.6"
   },
   "jest": {
