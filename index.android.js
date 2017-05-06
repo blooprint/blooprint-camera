@@ -17,6 +17,7 @@ class camera extends Component {
         */
         var server_IP = '192.168.0.2'
         this.socket = io.connect('http://'+ server_IP +':3456')
+        // this.socket = io.connect('http://'+ server_IP +':3456') //   just realized can send straight to blooprint/output server at 1234
     }
 
     render() {
@@ -25,8 +26,7 @@ class camera extends Component {
                 <Camera
                     ref={(cam) => { this.camera = cam; }}
                     style={styles.preview}
-                    aspect={Camera.constants.Aspect.fill}
-                    captureTarget={Camera.constants.CaptureTarget.memory}>
+                    aspect={Camera.constants.Aspect.fill}>
                         <Text style={styles.capture} onPress={() => this.bloop()}>bloop</Text>
                 </Camera>
             </View>
@@ -38,7 +38,11 @@ class camera extends Component {
         //options.location = ...
         this.camera.capture({metadata: options})
             .then((data) => {
-                this.socket.emit('bloop',{image: data, message:'input image from camera client'})
+                rnfs.readFile(data.path, 'base64')
+                    .then( (result) => {
+                        this.socket.emit('bloop',{image: result})
+                    }
+                )
             })
             .catch(err => console.error(err));
     }

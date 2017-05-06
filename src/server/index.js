@@ -18,10 +18,7 @@ io.sockets.on('connection', function (socket) {
     console.log("new camera client: " + socket.id);
 
     socket.on('bloop', function(data) {
-        console.log("Received: " + data.message);
-        console.log("image binary: " + data.image);
-
-        backSocket.emit('bloop',{image: data.image, message: data.message})
+        backSocket.emit('bloop',{image: data.image})
     });
 
     socket.on('disconnect', function() {
