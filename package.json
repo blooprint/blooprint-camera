@@ -9,13 +9,12 @@
     "android": "react-native run-android",
     "server": "node ./src/server"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "express": "^4.15.2",
     "react": "16.0.0-alpha.6",
     "react-native": "0.43.3",
-    "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
+    "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera",
     "socket.io": "^1.7.3",
     "socket.io-client": "^1.7.3",
     "babel-jest": "19.0.0",
